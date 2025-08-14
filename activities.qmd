@@ -75,6 +75,23 @@ milkfish_weights <- fish_weight("Milkfish", L)
 ```
 
 ```{r}
+#trying different way
+
+fish_weight2 <- function(common_name, L){
+  for(i in 1:ncol(fish_parms))
+  common_name <- common_name[i]
+  a <- a_est[i]
+  b <- b_est[i]
+  W <- a * L^b
+  print(W)
+}
+
+fish_weight2("Milkfish", 4)
+#NVM
+```
+
+
+```{r}
 wave_power <- function(H, t){
   Pdeep <- 0.5*H^2*t
   print(Pdeep)
@@ -95,5 +112,17 @@ wave_power <- function(H, t){
 }
 
 wave_power(height_range, 8)
+```
+
+```{r}
+wave_power <- function(H, t){
+  if(H > 12){ warning("deep equation was used")
+  print(0.81*H^2*t)}
+  
+  else if(H<=12){warning("shallow equation was used")
+  print(0.5*H^2*t)}
+}
+
+wave_power(8, 3)
 ```
 
