@@ -1,0 +1,99 @@
+---
+title: "loops_and_functions"
+format: html
+---
+
+```{r}
+library(here)
+library(tidyverse)
+```
+```{r}
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+transects <- c("Transect A", "Transect B", "Transect C")
+
+for(i in seq_along(weekdays)){
+  for(j in seq_along(transects)){
+    day <- weekdays[i]
+    transect <- transects[j]
+    print(paste0(day, "-", transect))
+  }
+}
+
+```
+
+```{r}
+force <- function(m, a){
+  f <- m * a
+  print(paste("The resulting force is", f, "Newtons"))
+}
+
+force(200, 0.5)
+```
+
+```{r}
+fish_parms <- data.frame(sci_name = c("Chanos chanos", "Sphyraena barracuda", "Caranx ignobilis"),
+common_name = c("Milkfish", "Great barracuda", "Giant trevally"),
+a_est = c(0.0905, 0.0181, 0.0353),
+b_est = c(2.52, 3.27, 3.05))
+  
+```
+
+```{r}
+fish_weight <- function(common_name, L){
+  if(common_name == "Milkfish"){
+    print(0.0905 * L^2.52)
+  }else if(common_name == "Great barracuda"){
+    print(0.0181 * L^3.27)
+  }else if(common_name == "Giant trevally"){
+    print(0.0353 * L^3.05)
+  }
+}
+
+fish_weight("Giant trevally", 10)
+fish_weight("Great barracuda", 5)
+```
+
+```{r}
+fish_length <- c(0:100, by = 1)
+
+#milkfish_weights <- vector(mode = "numeric", length = length(fish_length))
+
+fish_weight <- function(common_name, L){
+  for(i in seq_along(fish_length)){
+    L <- fish_length[i]
+    if(common_name == "Milkfish"){
+    print(0.0905 * L^2.52)
+  }else if(common_name == "Great barracuda"){
+    print(0.0181 * L^3.27)
+  }else if(common_name == "Giant trevally"){
+    print(0.0353 * L^3.05)
+  }
+  }
+}
+milkfish_weights <- fish_weight("Milkfish", L)
+
+```
+
+```{r}
+wave_power <- function(H, t){
+  Pdeep <- 0.5*H^2*t
+  print(Pdeep)
+}
+
+wave_power(2, 10)
+
+```
+```{r}
+height_range <- seq(from = 0, to = 3, by = 0.2)
+
+wave_power <- function(H, t){
+  for(i in seq_along(height_range)){
+  H <- height_range[i]
+  Pdeep <- 0.5*H^2*t
+  print(paste(Pdeep))
+  }
+}
+
+wave_power(height_range, 8)
+```
+
